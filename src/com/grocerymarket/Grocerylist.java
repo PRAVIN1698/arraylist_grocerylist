@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Grocerylist {
 
-    private ArrayList<String>grocerylist=new ArrayList<String>();
+    private   ArrayList<String>grocerylist=new ArrayList<String>();
 
 
 
@@ -27,28 +27,45 @@ public class Grocerylist {
 
     }
 
+  public void modif_item(String currentitem,String newitem){
+        int position=findItem(currentitem);
+        if(position>=0)
+        {
+            modify_item(position,newitem);
+        }
+  }
 
-
-    public void modif_item(int position,String newitem){
-
+    private void modify_item(int position,String newitem){
         grocerylist.set(position,newitem);
         System.out.println("Grocery Item "+(position+1)+" has been modified");
+
+
+    }
+    public void remove_Grocery(String newitem){
+        int position=findItem(newitem);
+        if(position>=0)
+        {
+            removeGrocery(position);
+        }
     }
 
-    public void removeGrocery(int position)
+   private void removeGrocery(int position)
     {
         String theItem=grocerylist.get(position);
         grocerylist.remove(position);
     }
 
-    public String findItem(String searchItem){
+   private int findItem(String searchItem) {
         //boolean exists =grocerylist.contains(searchItem);
-        int position=grocerylist.indexOf(searchItem);
-        if(position>=0){
-            return grocerylist.get(position);
-        }
+        return grocerylist.indexOf(searchItem);
+    }
 
-        return null;
+    public boolean onFile(String searchItem) {
+        int position =findItem(searchItem);
+        if (position>=0){
+            return true;
+        }
+        return false;
     }
 
 
